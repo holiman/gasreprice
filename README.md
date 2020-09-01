@@ -18,7 +18,7 @@ possible to trace blocks using alternate rules, like so:
         }})
 ```
 
-The `analysis.js` was loaded, and the traces were generated (see `./traces/`), containing
+The `analysis.js` was loaded, and the traces were generated (those are 500+Mb, I decided not to include them in this repo), containing
 the trace for `53` blocks, totalling `106` transactions.
 
 ## The experiment
@@ -31,9 +31,9 @@ When running with new rules, two things can typically happen:
 
 For 1), it is interesting to analyse:
 
-A) Would this particular execution have been 'salvaged' if more gas had been provided by the external caller?
-B) If not, would the `POKE` precompile have 'salvaged' it?
-C) If not, would the tx-access list have 'salvaged' it?
+A. Would this particular execution have been 'salvaged' if more gas had been provided by the external caller?
+B. If not, would the `POKE` precompile have 'salvaged' it?
+C. If not, would the tx-access list have 'salvaged' it?
 
 For 2), it is interesting to analyse:
 
@@ -333,3 +333,6 @@ The test on `Goerli`, covering `106` transactions, showed
 - Out of the `6` failing transactions, 
 	- `2` went `OOG` in the 'canon' version aswell as in the `alt` version
 	- All `6` seems to have been salvageable by using more external gas by the caller. 
+
+Note: the `gas` here refers to the gas used by the evm execution, and does not take into concern the intrinsic 
+gas used by the envelope transaction. Thus, a non-executing raw ether-send is listed as `0` gas. 
